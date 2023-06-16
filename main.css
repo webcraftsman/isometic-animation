@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(30, 35, 50);
+    margin: 0;
+}
+
+:root {
+    --marquee-width: 100vw;
+    --marquee-elements: 5;
+    --marquee-elements-displayed: 3;
+    --marquee-speed: 8s;
+
+    --marquee-element-width: calc(var(--marquee-width) / var(--marquee-elements-displayed));
+    --marquee-element-adjusted-width: var(--marquee-element-width);
+    --marquee-animation-duration: calc(var(--marquee-elements) * var(--marquee-speed));
+
+  }
+
+
+@keyframes scrollingLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-1 * var(--marquee-element-adjusted-width) * var(--marquee-elements))); }
+}
+
+@keyframes scrollingRight {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(1 * var(--marquee-element-adjusted-width) * var(--marquee-elements))); }
+}
+
+.section-1 {
+    height: 40vh;
+}
+
+
+.section-2 {
+    background-color: #2b313f;
+    height: 43vw;
+    overflow: hidden;
+    padding-top: 5vw;
+}
+
+.section-3 {
+    background-color: #0C4789;
+    height: 40vh;
+}
+
+.rotate-container {
+    rotate: -14deg;
+    transform-origin: top left;
+    width: calc(var(--marquee-element-width) * (var(--marquee-elements) * 2) );
+}
+    .rotate-container:not(:first-child) {
+        margin-top: -2.4vw;
+    }
+
+.rotate-container:nth-child(2n+1) {
+    animation: scrollingRight var(--marquee-animation-duration) linear infinite;
+    animation-play-state: paused;
+}
+
+.rotate-container:nth-child(2n+2) {
+    animation: scrollingLeft var(--marquee-animation-duration) linear infinite;
+    animation-play-state: paused;
+}
+
+.rotate-container.animate {
+    animation-play-state: running;
+}
+
+.container {
+    rotate: 14deg;
+    transform-origin: top left;
+}
+
+.row {
+    display: flex;
+    transform: rotateX(40deg) rotateZ(-18deg) skewX(12deg);
+    transform-origin: left top;
+}
+.rotate-container:nth-child(2n+1) .row {
+    flex-direction: row-reverse;
+    margin-right: calc((var(--marquee-element-width) * var(--marquee-elements)) + var(--marquee-element-width));
+}
+
+article {
+    flex-shrink: 0;
+    filter: drop-shadow(-6px 6px 10px rgba(0,0,0,.65));
+    padding: 0 1.1vw;
+//    width: var(--marquee-element-width);
+    position: relative;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    --marquee-element-adjusted-width: 696px;
+
+}
+
+article img {
+    height: auto;
+    max-width: 100%;
+}
