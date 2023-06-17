@@ -66,6 +66,10 @@ body {
     animation-play-state: paused;
 }
 
+.rotate-container:nth-child(2n+2) .container {
+    margin-left: -15vw;
+}
+
 .rotate-container.animate {
     animation-play-state: running;
 }
